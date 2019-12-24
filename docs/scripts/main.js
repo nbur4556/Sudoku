@@ -1,12 +1,12 @@
 const MAX_SQUARES = 9;
 var allSquares;
+var solveAttempts = 100;
 
-var testX = 4;
-var testY = 4;
+var furthestCell
 
 window.onload = function(){
 	InitAllSquares();
-	NewPuzzle();
+	//NewPuzzle();
 	
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
@@ -20,15 +20,16 @@ window.onload = function(){
 		NewPuzzle();
 	});
 	document.getElementById("btn-solve").addEventListener("click", function(){
-		//console.log("Solve Clicked");
-		//console.log(CheckValidCell(testX, testY)); // Testing
-		console.log(GetRandomValue() + 1);
+		for(let i = 0; i < solveAttempts; i++){
+			SolvePuzzle();
+		}
 	});
 	document.getElementById("btn-clear").addEventListener("click", function(){
 		ClearPuzzle();
 	});
 	document.getElementById("btn-submit").addEventListener("click", function(){
 		CheckValidPuzzle();
+		console.log(CheckValidPuzzle());
 	});
 }
 
@@ -64,19 +65,58 @@ function NewPuzzle(){
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
 			allSquares[x][y].value = GetRandomValue() + 1;
-			CheckValidValue(allSquares[x][y]);
 		}
+	}
+	
+	for(let i = 0; i < solveAttempts; i++){
+		SolvePuzzle();
+	}
+	
+	if(CheckValidPuzzle() == false){
+		//NewPuzzle();
 	}
 }
 
 function SolvePuzzle(){
+	var lockCells = true;
+	if(furthestCell){
+		furthestCell.readOnly = false;
+	}
 	
+	for(let x = 0; x < allSquares.length; x++){
+		for(let y = 0; y < allSquares[x].length; y++){
+			
+			if(CheckValidCell(x, y) && lockCells == true && allSquares[x][y].readOnly != true){
+				allSquares[x][y].readOnly = true;
+				furthestCell = allSquares[x][y];
+			}
+			
+			let stopValue = allSquares[x][y].value;
+			let keepGoing = true;
+			while(CheckValidCell(x, y) == false && keepGoing == true && allSquares[x][y].readOnly != true){
+				allSquares[x][y].value++;
+				if(allSquares[x][y].value > 9){
+					allSquares[x][y].value = 1;
+				}
+				
+				if(allSquares[x][y].value == stopValue){
+					keepGoing = false;
+					lockCells = false;
+					allSquares[x][y].value = GetRandomValue() + 1;
+				}
+			}
+			
+		}
+	}
+	
+	console.log(furthestCell);
 }
 
 //Sets value of all squares in the puzzle to ""
 function ClearPuzzle(){
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
+			allSquares[x][y].readOnly = false;
 			allSquares[x][y].value = "";
 		}
 	}
@@ -96,7 +136,7 @@ function CheckValidPuzzle(){
 		}
 	}
 	
-	console.log(isValid);
+	return isValid;
 }
 
 //Checks for squares with matching values within the cells row, column, and nonet
