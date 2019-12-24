@@ -1,31 +1,29 @@
 const MAX_SQUARES = 9;
 var allSquares;
 
+var testX = 4;
+var testY = 4;
+
 window.onload = function(){
 	InitAllSquares();
+	NewPuzzle();
 	
 	document.getElementById("btn-new").addEventListener("click", function(){
-		console.log("New Clicked");
+		NewPuzzle();
 	});
 	document.getElementById("btn-solve").addEventListener("click", function(){
 		console.log("Solve Clicked");
+		console.log(CheckValidCell(testX, testY)); // Testing
 	});
 	document.getElementById("btn-clear").addEventListener("click", function(){
-		console.log("Clear Clicked");
+		ClearPuzzle();
 	});
 	document.getElementById("btn-submit").addEventListener("click", function(){
-		console.log("Submit Clicked");
-		console.log(CheckValid(4, 4));
+		CheckValidPuzzle();
 	});
-	
-	//Testing
-	for(let i = 0; i < allSquares.length; i++){
-		for(let j = 0; j < allSquares[i].length; j++){
-			allSquares[i][j].value = (i*9)+j;
-		}
-	}
 }
 
+//Creates and orders an array of all squares in the puzzle
 function InitAllSquares(){
 	allSquares = new Array(MAX_SQUARES);
 	for(let i = 0; i < allSquares.length; i++){
@@ -45,13 +43,49 @@ function InitAllSquares(){
 		}
 		
 		if((i + 1) % 3 == 0){
-			sectionOffset += 18;
+			sectionOffset += MAX_SQUARES * 2;
 		}
 	}
 }
 
+function NewPuzzle(){
+	ClearPuzzle();
+	
+	for(let x = 0; x < allSquares.length; x++){
+		for(let y = 0; y < allSquares[x].length; y++){
+			allSquares[x][y].value = (x * 9) + y;
+		}
+	}
+}
+
+//Sets value of all squares in the puzzle to ""
+function ClearPuzzle(){
+	for(let x = 0; x < allSquares.length; x++){
+		for(let y = 0; y < allSquares[x].length; y++){
+			allSquares[x][y].value = "";
+		}
+	}
+}
+
+//Checks that all squares in the puzzle are valid
+function CheckValidPuzzle(){
+	var isValid = true;
+	
+	for(let x = 0; x < allSquares.length; x++){
+		for(let y = 0; y < allSquares[x].length; y++){
+			if(isValid == false){
+				break;
+			}
+			
+			isValid = CheckValidCell(x, y);
+		}
+	}
+	
+	console.log(isValid);
+}
+
+//Checks for squares with matching values within the cells row, column, and nonet
 function CheckValidCell(cellX, cellY){
-	console.log(allSquares[cellX][cellY].value);
 	let boxX = cellX;
 	let boxY = cellY;
 	
@@ -90,3 +124,5 @@ function CheckValidCell(cellX, cellY){
 	
 	return true;
 }
+
+//CheckValidValue
