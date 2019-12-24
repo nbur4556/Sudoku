@@ -20,8 +20,9 @@ window.onload = function(){
 		NewPuzzle();
 	});
 	document.getElementById("btn-solve").addEventListener("click", function(){
-		console.log("Solve Clicked");
-		console.log(CheckValidCell(testX, testY)); // Testing
+		//console.log("Solve Clicked");
+		//console.log(CheckValidCell(testX, testY)); // Testing
+		console.log(GetRandomValue() + 1);
 	});
 	document.getElementById("btn-clear").addEventListener("click", function(){
 		ClearPuzzle();
@@ -56,15 +57,20 @@ function InitAllSquares(){
 	}
 }
 
+//Fills puzzle squares with random numbers between 1 and 9
 function NewPuzzle(){
 	ClearPuzzle();
 	
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
-			allSquares[x][y].value = (x * 9) + y;
+			allSquares[x][y].value = GetRandomValue() + 1;
 			CheckValidValue(allSquares[x][y]);
 		}
 	}
+}
+
+function SolvePuzzle(){
+	
 }
 
 //Sets value of all squares in the puzzle to ""
@@ -144,8 +150,13 @@ function CheckValidValue(square){
 	}
 	
 	if(!isValid){
+		console.log("Entered value not valid");
 		square.value = "";
 	}
+}
+
+function GetRandomValue(max = 9){
+	return Math.floor(Math.random() * Math.floor(max));
 }
 
 
