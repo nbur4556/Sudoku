@@ -8,6 +8,14 @@ window.onload = function(){
 	InitAllSquares();
 	NewPuzzle();
 	
+	for(let x = 0; x < allSquares.length; x++){
+		for(let y = 0; y < allSquares[x].length; y++){
+			allSquares[x][y].onchange = function(){
+				CheckValidValue(allSquares[x][y]);
+			}
+		}
+	}
+	
 	document.getElementById("btn-new").addEventListener("click", function(){
 		NewPuzzle();
 	});
@@ -54,6 +62,7 @@ function NewPuzzle(){
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
 			allSquares[x][y].value = (x * 9) + y;
+			CheckValidValue(allSquares[x][y]);
 		}
 	}
 }
@@ -125,4 +134,39 @@ function CheckValidCell(cellX, cellY){
 	return true;
 }
 
-//CheckValidValue
+function CheckValidValue(square){
+	isValid = false;
+	
+	for(let i = 0; i < 9; i++){
+		if(square.value == i + 1 || square.value == (i+1).toString()){
+			isValid = true;
+		}
+	}
+	
+	if(!isValid){
+		square.value = "";
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
