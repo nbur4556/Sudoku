@@ -23,9 +23,9 @@ window.onload = function(){
 	document.getElementById("btn-new").addEventListener("click", function(){
 		NewPuzzle();
 	});
-	document.getElementById("btn-solve").addEventListener("click", function(){
+	/*document.getElementById("btn-solve").addEventListener("click", function(){
 		console.log("Solve Puzzle");
-	});
+	});*/
 	document.getElementById("btn-clear").addEventListener("click", function(){
 		ClearPuzzle();
 	});
@@ -78,10 +78,9 @@ function NewPuzzle(){
 			if(isBacktracking == false){
 				currentNode = new SquareNode(GetRandomValue() + 1, currentNode);
 			}
-			else if(currentNode.currentValue < 9){
+			else if(currentNode.currentValue < MAX_SQUARES){
 				currentNode.currentValue++;
 				if(currentNode.currentValue == currentNode.initialValue){
-					//console.log(x + " " + y); //Testing
 					allSquares[x][y].value = "";
 					currentNode = currentNode.parentNode;
 					y -= 2;
@@ -111,7 +110,7 @@ function NewPuzzle(){
 			
 			while(CheckValidCell(x, y) == false){
 					currentNode.currentValue++;
-					if(currentNode.currentValue > 9){
+					if(currentNode.currentValue > MAX_SQUARES){
 						currentNode.currentValue = 1;
 					}
 					if(currentNode.currentValue == currentNode.initialValue){
@@ -230,7 +229,7 @@ function CheckValidCell(cellX, cellY){
 function CheckValidValue(square){
 	isValid = false;
 	
-	for(let i = 0; i < 9; i++){
+	for(let i = 0; i < MAX_SQUARES; i++){
 		if(square.value == i + 1 || square.value == (i+1).toString()){
 			isValid = true;
 		}
@@ -243,7 +242,7 @@ function CheckValidValue(square){
 }
 
 //returns a random value between 0 and max, not including max
-function GetRandomValue(max = 9){
+function GetRandomValue(max = MAX_SQUARES){
 	return Math.floor(Math.random() * Math.floor(max));
 }
 
