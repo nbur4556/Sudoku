@@ -183,6 +183,11 @@ function CheckValidCell(cellX, cellY){
 	let boxX = cellX;
 	let boxY = cellY;
 	
+	//Check if empty
+	if(allSquares[cellX][cellY].value == ""){
+		return false;
+	}
+	
 	//Check Vertical
 	for(let i = 0; i < MAX_SQUARES; i++){
 		if(i == cellX)
