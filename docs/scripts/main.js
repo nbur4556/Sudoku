@@ -1,8 +1,5 @@
 const MAX_SQUARES = 9;
 var allSquares;
-var solveAttempts = 100;
-
-var furthestCell
 
 window.onload = function(){
 	InitAllSquares();
@@ -20,9 +17,7 @@ window.onload = function(){
 		NewPuzzle();
 	});
 	document.getElementById("btn-solve").addEventListener("click", function(){
-		for(let i = 0; i < solveAttempts; i++){
-			SolvePuzzle();
-		}
+		console.log("Solve Puzzle");
 	});
 	document.getElementById("btn-clear").addEventListener("click", function(){
 		ClearPuzzle();
@@ -64,52 +59,36 @@ function NewPuzzle(){
 	
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
+			
+			var repeatValue = allSquares[x][y].value;
 			allSquares[x][y].value = GetRandomValue() + 1;
-		}
-	}
-	
-	for(let i = 0; i < solveAttempts; i++){
-		SolvePuzzle();
-	}
-	
-	if(CheckValidPuzzle() == false){
-		//NewPuzzle();
-	}
-}
-
-function SolvePuzzle(){
-	var lockCells = true;
-	if(furthestCell){
-		furthestCell.readOnly = false;
-	}
-	
-	for(let x = 0; x < allSquares.length; x++){
-		for(let y = 0; y < allSquares[x].length; y++){
+			var matchValue = allSquares[x][y].value;
 			
-			if(CheckValidCell(x, y) && lockCells == true && allSquares[x][y].readOnly != true){
-				allSquares[x][y].readOnly = true;
-				furthestCell = allSquares[x][y];
-			}
-			
-			let stopValue = allSquares[x][y].value;
-			let keepGoing = true;
-			while(CheckValidCell(x, y) == false && keepGoing == true && allSquares[x][y].readOnly != true){
+			while(CheckValidCell(x, y) == false){
 				allSquares[x][y].value++;
+				
 				if(allSquares[x][y].value > 9){
 					allSquares[x][y].value = 1;
 				}
 				
-				if(allSquares[x][y].value == stopValue){
-					keepGoing = false;
-					lockCells = false;
-					allSquares[x][y].value = GetRandomValue() + 1;
+				//Go back a cell
+				if(matchValue == allSquares[x][y].value || repeatValue == allSquares[x][y].value){ //OR IF VALUE REPEATES
+					allSquares[x][y].value = "";
+				
+					if(y - 1 >= 0){
+						y -= 2;
+						continue;
+					}
+					else{
+						x--;
+						y = 7;
+					}
 				}
+				
 			}
 			
 		}
 	}
-	
-	console.log(furthestCell);
 }
 
 //Sets value of all squares in the puzzle to ""
