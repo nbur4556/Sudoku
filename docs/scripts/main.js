@@ -11,6 +11,7 @@ class SquareNode{
 
 window.onload = function(){
 	InitAllSquares();
+	submitMsg = document.getElementById("submit-msg");
 	
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
@@ -21,17 +22,23 @@ window.onload = function(){
 	}
 	
 	document.getElementById("btn-new").addEventListener("click", function(){
+		submitMsg.innerHTML = "";
 		NewPuzzle();
 	});
 	/*document.getElementById("btn-solve").addEventListener("click", function(){
 		console.log("Solve Puzzle");
 	});*/
 	document.getElementById("btn-clear").addEventListener("click", function(){
+		submitMsg.innerHTML = "";
 		ClearPuzzle();
 	});
 	document.getElementById("btn-submit").addEventListener("click", function(){
-		CheckValidPuzzle();
-		console.log(CheckValidPuzzle());
+		if(CheckValidPuzzle()){
+			submitMsg.innerHTML = "Correct";
+		}
+		else{
+			submitMsg.innerHTML = "Incorrect";
+		}
 	});
 }
 

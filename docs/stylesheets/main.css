@@ -37,3 +37,11 @@
 	width: 474px;
 	text-align: right;
 }
+
+.submit-msg{
+	width: 474px;
+	text-align: right;
+	font-size: 25px;
+	font-weight: bold;
+	font-family: monospace;
+}
