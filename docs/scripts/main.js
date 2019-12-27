@@ -143,7 +143,7 @@ function NewPuzzle(){
 function ClearPuzzle(){
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
-			allSquares[x][y].readOnly = false;
+			allSquares[x][y].disabled = false;
 			allSquares[x][y].value = "";
 		}
 	}
@@ -156,6 +156,9 @@ function ClearRandomSquares(chanceToRemove = 50){
 			
 			if(chanceToRemove >= rand){
 				allSquares[x][y].value = "";
+			}
+			else{
+				allSquares[x][y].disabled = true;
 			}
 		}
 	}
@@ -239,6 +242,7 @@ function CheckValidValue(square){
 	}
 }
 
+//returns a random value between 0 and max, not including max
 function GetRandomValue(max = 9){
 	return Math.floor(Math.random() * Math.floor(max));
 }
