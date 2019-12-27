@@ -1,6 +1,14 @@
 const MAX_SQUARES = 9;
 var allSquares;
 
+class SquareNode{
+	constructor(initialValue, parentNode){
+		this.initialValue = initialValue;
+		this.currentValue = initialValue;
+		this.parentNode = parentNode;
+	}
+}
+
 window.onload = function(){
 	InitAllSquares();
 	//NewPuzzle();
@@ -56,39 +64,72 @@ function InitAllSquares(){
 //Fills puzzle squares with random numbers between 1 and 9
 function NewPuzzle(){
 	ClearPuzzle();
+	var currentNode = null;
+	var isBacktracking = false;
 	
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
 			
-			var repeatValue = allSquares[x][y].value;
-			allSquares[x][y].value = GetRandomValue() + 1;
-			var matchValue = allSquares[x][y].value;
-			
-			while(CheckValidCell(x, y) == false){
-				allSquares[x][y].value++;
-				
-				if(allSquares[x][y].value > 9){
-					allSquares[x][y].value = 1;
-				}
-				
-				//Go back a cell
-				if(matchValue == allSquares[x][y].value || repeatValue == allSquares[x][y].value){ //OR IF VALUE REPEATES
+			if(isBacktracking == false){
+				currentNode = new SquareNode(GetRandomValue() + 1, currentNode);
+			}
+			else if(currentNode.currentValue < 9){
+				currentNode.currentValue++;
+				if(currentNode.currentValue == currentNode.initialValue){
+					//console.log(x + " " + y); //Testing
 					allSquares[x][y].value = "";
-				
-					if(y - 1 >= 0){
-						y -= 2;
-						continue;
-					}
-					else{
-						x--;
-						y = 7;
-					}
+					currentNode = currentNode.parentNode;
+					y -= 2;
+					
+					isBacktracking = true;
+					
+					continue;
 				}
-				
+			}
+			else{
+				currentNode.currentValue = 1;
+				if(currentNode.currentValue == currentNode.initialValue){
+					//console.log(x + " " + y); //Testing
+					allSquares[x][y].value = "";
+					currentNode = currentNode.parentNode;
+					y -= 2;
+					
+					isBacktracking = true;
+					
+					continue;
+				}
 			}
 			
+			isBacktracking = false;
+			//console.log(x + " " + y); //Testing
+			allSquares[x][y].value = currentNode.currentValue;
+			
+			while(CheckValidCell(x, y) == false){
+					currentNode.currentValue++;
+					if(currentNode.currentValue > 9){
+						currentNode.currentValue = 1;
+					}
+					if(currentNode.currentValue == currentNode.initialValue){
+						allSquares[x][y].value = "";
+						currentNode = currentNode.parentNode;
+						y -= 2;
+						
+						if(y < 0){
+							y = 8;
+							x--;
+						}
+						
+						isBacktracking = true;
+						
+						break;
+					}
+					
+					allSquares[x][y].value = currentNode.currentValue;
+			}			
+
 		}
 	}
+	
 }
 
 //Sets value of all squares in the puzzle to ""
