@@ -11,7 +11,6 @@ class SquareNode{
 
 window.onload = function(){
 	InitAllSquares();
-	//NewPuzzle();
 	
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
@@ -69,6 +68,12 @@ function NewPuzzle(){
 	
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
+			
+			if(allSquares[x][y] == undefined){
+				console.log("redo puzzle");
+				NewPuzzle();
+				return;
+			}
 			
 			if(isBacktracking == false){
 				currentNode = new SquareNode(GetRandomValue() + 1, currentNode);
@@ -130,6 +135,8 @@ function NewPuzzle(){
 		}
 	}
 	
+	difficultyRange = document.getElementById("difficulty-range");
+	ClearRandomSquares(difficultyRange.value);	
 }
 
 //Sets value of all squares in the puzzle to ""
@@ -138,6 +145,18 @@ function ClearPuzzle(){
 		for(let y = 0; y < allSquares[x].length; y++){
 			allSquares[x][y].readOnly = false;
 			allSquares[x][y].value = "";
+		}
+	}
+}
+
+function ClearRandomSquares(chanceToRemove = 50){	
+	for(let x = 0; x < allSquares.length; x++){
+		for(let y = 0; y < allSquares[x].length; y++){
+			let rand = GetRandomValue(100) + 1;
+			
+			if(chanceToRemove >= rand){
+				allSquares[x][y].value = "";
+			}
 		}
 	}
 }
