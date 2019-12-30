@@ -1,5 +1,6 @@
 const MAX_SQUARES = 9;
 var allSquares;
+var selectNumber = 0;
 
 class SquareNode{
 	constructor(initialValue, parentNode){
@@ -13,6 +14,7 @@ window.onload = function(){
 	InitAllSquares();
 	submitMsg = document.getElementById("submit-msg");
 	
+	//PUZZLE
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
 			allSquares[x][y].onchange = function(){
@@ -21,6 +23,108 @@ window.onload = function(){
 		}
 	}
 	
+	//NUMBER SELECTORS
+	var oneButton = document.getElementById("one-selector");
+	oneButton.addEventListener("click", function(){
+		console.log("one");
+		if(oneButton.classList[0] == "active-selector"){
+			console.log("active class");
+			UnsetSelectNumber(oneButton);
+		}
+		else{
+			SetSelectNumber(1, oneButton);
+		}
+	});
+	var twoButton = document.getElementById("two-selector");
+	twoButton.addEventListener("click", function(){
+		console.log("two");
+		if(twoButton.classList[0] == "active-selector"){
+			console.log("active class");
+			UnsetSelectNumber(twoButton);
+		}
+		else{
+			SetSelectNumber(2, twoButton);
+		}
+	});
+	var threeButton = document.getElementById("three-selector");
+	threeButton.addEventListener("click", function(){
+		console.log("three");
+		if(threeButton.classList[0] == "active-selector"){
+			console.log("active class");
+			UnsetSelectNumber(threeButton);
+		}
+		else{
+			SetSelectNumber(3, threeButton);
+		}
+	});
+	var fourButton = document.getElementById("four-selector");
+	fourButton.addEventListener("click", function(){
+		console.log("four");
+		if(fourButton.classList[0] == "active-selector"){
+			console.log("active class");
+			UnsetSelectNumber(fourButton);
+		}
+		else{
+			SetSelectNumber(4, fourButton);
+		}
+	});
+	var fiveButton = document.getElementById("five-selector");
+	fiveButton.addEventListener("click", function(){
+		console.log("five");
+		if(fiveButton.classList[0] == "active-selector"){
+			console.log("active class");
+			UnsetSelectNumber(fiveButton);
+		}
+		else{
+			SetSelectNumber(5, fiveButton);
+		}
+	});
+	var sixButton = document.getElementById("six-selector");
+	sixButton.addEventListener("click", function(){
+		console.log("six");
+		if(sixButton.classList[0] == "active-selector"){
+			console.log("active class");
+			UnsetSelectNumber(sixButton);
+		}
+		else{
+			SetSelectNumber(6, sixButton);
+		}
+	});
+	var sevenButton = document.getElementById("seven-selector");
+	sevenButton.addEventListener("click", function(){
+		console.log("seven");
+		if(sevenButton.classList[0] == "active-selector"){
+			console.log("active class");
+			UnsetSelectNumber(sevenButton);
+		}
+		else{
+			SetSelectNumber(7, sevenButton);
+		}
+	});
+	var eightButton = document.getElementById("eight-selector");
+	eightButton.addEventListener("click", function(){
+		console.log("eight");
+		if(eightButton.classList[0] == "active-selector"){
+			console.log("active class");
+			UnsetSelectNumber(eightButton);
+		}
+		else{
+			SetSelectNumber(8, eightButton);
+		}
+	});
+	var nineButton = document.getElementById("nine-selector");
+	nineButton.addEventListener("click", function(){
+		console.log("nine");
+		if(nineButton.classList[0] == "active-selector"){
+			console.log("active class");
+			UnsetSelectNumber(nineButton);
+		}
+		else{
+			SetSelectNumber(9, nineButton);
+		}
+	});
+	
+	//CONTROLS	
 	document.getElementById("btn-new").addEventListener("click", function(){
 		submitMsg.innerHTML = "";
 		NewPuzzle();
@@ -40,6 +144,24 @@ window.onload = function(){
 			submitMsg.innerHTML = "Incorrect";
 		}
 	});
+}
+
+//Sets select number
+function SetSelectNumber(setNum, setBtn){
+	selectNumber = setNum;
+	setBtn.classList.add("active-selector");
+	
+	console.log(selectNumber);
+	console.log(setBtn.classList);
+}
+
+//Unsets select number
+function UnsetSelectNumber(setBtn){
+	selectNumber = 0;
+	setBtn.classList.remove("active-selector");
+	
+	console.log(selectNumber);
+	console.log(setBtn.classList);
 }
 
 //Creates and orders an array of all squares in the puzzle

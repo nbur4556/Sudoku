@@ -31,6 +31,19 @@
 	font-family: monospace;
 }
 
+.number-selectors{
+	display: flex;
+	justify-content: space-between;
+	
+	margin-top: 10px;
+	
+	width: 474px;
+}
+
+.active-selector{
+	background-color: yellow;
+}
+
 .controls{
 	margin: 10px;
 	
