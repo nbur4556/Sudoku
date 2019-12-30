@@ -27,102 +27,113 @@ window.onload = function(){
 	}
 	
 	//NUMBER SELECTORS
+	var numberSelectors = document.getElementsByClassName("selector");
+	
 	var oneButton = document.getElementById("one-selector");
 	oneButton.addEventListener("click", function(){
 		console.log("one");
-		if(oneButton.classList[0] == "active-selector"){
+		if(oneButton.classList[1] == "active-selector"){
 			console.log("active class");
 			UnsetSelectNumber(oneButton);
 		}
 		else{
+			UnselectAll(numberSelectors);
 			SetSelectNumber(1, oneButton);
 		}
 	});
 	var twoButton = document.getElementById("two-selector");
 	twoButton.addEventListener("click", function(){
 		console.log("two");
-		if(twoButton.classList[0] == "active-selector"){
+		if(twoButton.classList[1] == "active-selector"){
 			console.log("active class");
 			UnsetSelectNumber(twoButton);
 		}
 		else{
+			UnselectAll(numberSelectors);
 			SetSelectNumber(2, twoButton);
 		}
 	});
 	var threeButton = document.getElementById("three-selector");
 	threeButton.addEventListener("click", function(){
 		console.log("three");
-		if(threeButton.classList[0] == "active-selector"){
+		if(threeButton.classList[1] == "active-selector"){
 			console.log("active class");
 			UnsetSelectNumber(threeButton);
 		}
 		else{
+			UnselectAll(numberSelectors);
 			SetSelectNumber(3, threeButton);
 		}
 	});
 	var fourButton = document.getElementById("four-selector");
 	fourButton.addEventListener("click", function(){
 		console.log("four");
-		if(fourButton.classList[0] == "active-selector"){
+		if(fourButton.classList[1] == "active-selector"){
 			console.log("active class");
 			UnsetSelectNumber(fourButton);
 		}
 		else{
+			UnselectAll(numberSelectors);
 			SetSelectNumber(4, fourButton);
 		}
 	});
 	var fiveButton = document.getElementById("five-selector");
 	fiveButton.addEventListener("click", function(){
 		console.log("five");
-		if(fiveButton.classList[0] == "active-selector"){
+		if(fiveButton.classList[1] == "active-selector"){
 			console.log("active class");
 			UnsetSelectNumber(fiveButton);
 		}
 		else{
+			UnselectAll(numberSelectors);
 			SetSelectNumber(5, fiveButton);
 		}
 	});
 	var sixButton = document.getElementById("six-selector");
 	sixButton.addEventListener("click", function(){
 		console.log("six");
-		if(sixButton.classList[0] == "active-selector"){
+		if(sixButton.classList[1] == "active-selector"){
 			console.log("active class");
 			UnsetSelectNumber(sixButton);
 		}
 		else{
+			UnselectAll(numberSelectors);
 			SetSelectNumber(6, sixButton);
 		}
 	});
 	var sevenButton = document.getElementById("seven-selector");
 	sevenButton.addEventListener("click", function(){
 		console.log("seven");
-		if(sevenButton.classList[0] == "active-selector"){
+		if(sevenButton.classList[1] == "active-selector"){
 			console.log("active class");
 			UnsetSelectNumber(sevenButton);
 		}
 		else{
+			UnselectAll(numberSelectors);
 			SetSelectNumber(7, sevenButton);
 		}
 	});
 	var eightButton = document.getElementById("eight-selector");
 	eightButton.addEventListener("click", function(){
 		console.log("eight");
-		if(eightButton.classList[0] == "active-selector"){
+		if(eightButton.classList[1] == "active-selector"){
 			console.log("active class");
 			UnsetSelectNumber(eightButton);
 		}
 		else{
+			UnselectAll(numberSelectors);
 			SetSelectNumber(8, eightButton);
 		}
 	});
 	var nineButton = document.getElementById("nine-selector");
 	nineButton.addEventListener("click", function(){
 		console.log("nine");
-		if(nineButton.classList[0] == "active-selector"){
+		if(nineButton.classList[1] == "active-selector"){
 			console.log("active class");
 			UnsetSelectNumber(nineButton);
 		}
 		else{
+			UnselectAll(numberSelectors);
 			SetSelectNumber(9, nineButton);
 		}
 	});
@@ -165,6 +176,12 @@ function UnsetSelectNumber(setBtn){
 	
 	console.log(selectNumber);
 	console.log(setBtn.classList);
+}
+
+function UnselectAll(numberSelectors){
+	for(let i = 0; i < numberSelectors.length; i++){
+		numberSelectors[i].classList.remove("active-selector");
+	}
 }
 
 function SetSquareNumber(x, y){
