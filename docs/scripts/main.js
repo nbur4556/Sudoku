@@ -17,6 +17,9 @@ window.onload = function(){
 	//PUZZLE
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
+			allSquares[x][y].onclick = function(){
+				SetSquareNumber(x, y);
+			}
 			allSquares[x][y].onchange = function(){
 				CheckValidValue(allSquares[x][y]);
 			}
@@ -162,6 +165,12 @@ function UnsetSelectNumber(setBtn){
 	
 	console.log(selectNumber);
 	console.log(setBtn.classList);
+}
+
+function SetSquareNumber(x, y){
+	if(selectNumber != 0){
+		allSquares[x][y].value = selectNumber;
+	}
 }
 
 //Creates and orders an array of all squares in the puzzle
