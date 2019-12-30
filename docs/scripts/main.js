@@ -28,115 +28,18 @@ window.onload = function(){
 	
 	//NUMBER SELECTORS
 	var numberSelectors = document.getElementsByClassName("selector");
-	
-	var oneButton = document.getElementById("one-selector");
-	oneButton.addEventListener("click", function(){
-		console.log("one");
-		if(oneButton.classList[1] == "active-selector"){
-			console.log("active class");
-			UnsetSelectNumber(oneButton);
+	for(let i = 0; i < numberSelectors.length; i++){
+		numberSelectors[i].onclick = function(){
+			console.log("Selector: " + (i + 1));
+			if(numberSelectors[i].classList[1] == "active-selector"){
+				UnsetSelectNumber(numberSelectors[i]);
+			}
+			else{
+				UnselectAll(numberSelectors);
+				SetSelectNumber(i+1, numberSelectors[i]);
+			}
 		}
-		else{
-			UnselectAll(numberSelectors);
-			SetSelectNumber(1, oneButton);
-		}
-	});
-	var twoButton = document.getElementById("two-selector");
-	twoButton.addEventListener("click", function(){
-		console.log("two");
-		if(twoButton.classList[1] == "active-selector"){
-			console.log("active class");
-			UnsetSelectNumber(twoButton);
-		}
-		else{
-			UnselectAll(numberSelectors);
-			SetSelectNumber(2, twoButton);
-		}
-	});
-	var threeButton = document.getElementById("three-selector");
-	threeButton.addEventListener("click", function(){
-		console.log("three");
-		if(threeButton.classList[1] == "active-selector"){
-			console.log("active class");
-			UnsetSelectNumber(threeButton);
-		}
-		else{
-			UnselectAll(numberSelectors);
-			SetSelectNumber(3, threeButton);
-		}
-	});
-	var fourButton = document.getElementById("four-selector");
-	fourButton.addEventListener("click", function(){
-		console.log("four");
-		if(fourButton.classList[1] == "active-selector"){
-			console.log("active class");
-			UnsetSelectNumber(fourButton);
-		}
-		else{
-			UnselectAll(numberSelectors);
-			SetSelectNumber(4, fourButton);
-		}
-	});
-	var fiveButton = document.getElementById("five-selector");
-	fiveButton.addEventListener("click", function(){
-		console.log("five");
-		if(fiveButton.classList[1] == "active-selector"){
-			console.log("active class");
-			UnsetSelectNumber(fiveButton);
-		}
-		else{
-			UnselectAll(numberSelectors);
-			SetSelectNumber(5, fiveButton);
-		}
-	});
-	var sixButton = document.getElementById("six-selector");
-	sixButton.addEventListener("click", function(){
-		console.log("six");
-		if(sixButton.classList[1] == "active-selector"){
-			console.log("active class");
-			UnsetSelectNumber(sixButton);
-		}
-		else{
-			UnselectAll(numberSelectors);
-			SetSelectNumber(6, sixButton);
-		}
-	});
-	var sevenButton = document.getElementById("seven-selector");
-	sevenButton.addEventListener("click", function(){
-		console.log("seven");
-		if(sevenButton.classList[1] == "active-selector"){
-			console.log("active class");
-			UnsetSelectNumber(sevenButton);
-		}
-		else{
-			UnselectAll(numberSelectors);
-			SetSelectNumber(7, sevenButton);
-		}
-	});
-	var eightButton = document.getElementById("eight-selector");
-	eightButton.addEventListener("click", function(){
-		console.log("eight");
-		if(eightButton.classList[1] == "active-selector"){
-			console.log("active class");
-			UnsetSelectNumber(eightButton);
-		}
-		else{
-			UnselectAll(numberSelectors);
-			SetSelectNumber(8, eightButton);
-		}
-	});
-	var nineButton = document.getElementById("nine-selector");
-	nineButton.addEventListener("click", function(){
-		console.log("nine");
-		if(nineButton.classList[1] == "active-selector"){
-			console.log("active class");
-			UnsetSelectNumber(nineButton);
-		}
-		else{
-			UnselectAll(numberSelectors);
-			SetSelectNumber(9, nineButton);
-		}
-	});
+	}
 	
 	//CONTROLS	
 	document.getElementById("btn-new").addEventListener("click", function(){
