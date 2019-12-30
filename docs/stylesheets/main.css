@@ -1,29 +1,25 @@
+/*Puzzle Section*/
 .puzzle{
-	display: flex;
-	justify-content: space-around;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: repeat(3, 11vw);
+	align-items: stretch;
 	
 	border: 2px solid black;
 	
-	width: 474px;
+	width: 33vw;
+	height: 33vw;
 }
 
 .nonet{
-	display: flex;
-	justify-content: space-around;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: 33.33% 33.33% 33.33%;
+	align-items: stretch;
 	
 	border: 1px solid black;
-	
-	width: 156px;
 }
 
 .square{
-	padding: 0;
 	border: 1px solid black;
-	
-	width: 50px;
-	height: 50px;
 	
 	text-align: center;
 	font-size: 25px;
@@ -31,28 +27,33 @@
 	font-family: monospace;
 }
 
+/*Number Selectors Section*/
 .number-selectors{
 	display: flex;
 	justify-content: space-between;
 	
 	margin-top: 10px;
 	
-	width: 474px;
+	width: 33vw;
 }
 
 .active-selector{
 	background-color: yellow;
 }
 
+/*Controls Section*/
 .controls{
 	margin: 10px;
 	
-	width: 474px;
+	width: 33vw;
+	
 	text-align: right;
 }
 
+/*Submit Message Section*/
 .submit-msg{
-	width: 474px;
+	width: 33vw;
+	
 	text-align: right;
 	font-size: 25px;
 	font-weight: bold;

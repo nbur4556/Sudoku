@@ -63,36 +63,6 @@ window.onload = function(){
 	});
 }
 
-//Sets select number
-function SetSelectNumber(setNum, setBtn){
-	selectNumber = setNum;
-	setBtn.classList.add("active-selector");
-	
-	console.log(selectNumber);
-	console.log(setBtn.classList);
-}
-
-//Unsets select number
-function UnsetSelectNumber(setBtn){
-	selectNumber = 0;
-	setBtn.classList.remove("active-selector");
-	
-	console.log(selectNumber);
-	console.log(setBtn.classList);
-}
-
-function UnselectAll(numberSelectors){
-	for(let i = 0; i < numberSelectors.length; i++){
-		numberSelectors[i].classList.remove("active-selector");
-	}
-}
-
-function SetSquareNumber(x, y){
-	if(selectNumber != 0){
-		allSquares[x][y].value = selectNumber;
-	}
-}
-
 //Creates and orders an array of all squares in the puzzle
 function InitAllSquares(){
 	allSquares = new Array(MAX_SQUARES);
@@ -196,6 +166,38 @@ function NewPuzzle(){
 	ClearRandomSquares(difficultyRange.value);	
 }
 
+//Sets select number
+function SetSelectNumber(setNum, setBtn){
+	selectNumber = setNum;
+	setBtn.classList.add("active-selector");
+	
+	console.log(selectNumber);
+	console.log(setBtn.classList);
+}
+
+//Unsets select number
+function UnsetSelectNumber(setBtn){
+	selectNumber = 0;
+	setBtn.classList.remove("active-selector");
+	
+	console.log(selectNumber);
+	console.log(setBtn.classList);
+}
+
+//Unselects all number selectors
+function UnselectAll(numberSelectors){
+	for(let i = 0; i < numberSelectors.length; i++){
+		numberSelectors[i].classList.remove("active-selector");
+	}
+}
+
+//Sets value of square to selected number
+function SetSquareNumber(x, y){
+	if(selectNumber != 0){
+		allSquares[x][y].value = selectNumber;
+	}
+}
+
 //Sets value of all squares in the puzzle to ""
 function ClearPuzzle(){
 	for(let x = 0; x < allSquares.length; x++){
@@ -206,6 +208,7 @@ function ClearPuzzle(){
 	}
 }
 
+//Randomly clear squares based off difficuly setting
 function ClearRandomSquares(chanceToRemove = 50){	
 	for(let x = 0; x < allSquares.length; x++){
 		for(let y = 0; y < allSquares[x].length; y++){
@@ -284,6 +287,7 @@ function CheckValidCell(cellX, cellY){
 	return true;
 }
 
+//Check that value entered is between 1 and 9
 function CheckValidValue(square){
 	isValid = false;
 	
