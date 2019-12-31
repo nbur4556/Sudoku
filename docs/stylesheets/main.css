@@ -1,8 +1,17 @@
+article{
+	display: grid;
+	grid-template-columns: 30% 40% 20% 30%;
+	align-items: center;
+}
+
 /*Puzzle Section*/
 .puzzle{
 	display: grid;
 	grid-template-columns: repeat(3, 11vw);
 	align-items: stretch;
+	
+	place-self: center;
+	grid-column: 2 / 3;
 	
 	border: 2px solid black;
 	
@@ -30,11 +39,16 @@
 /*Number Selectors Section*/
 .number-selectors{
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
 	
-	margin-top: 10px;
-	
-	width: 33vw;
+	justify-self: start;
+	align-self: center;
+}
+
+.selector{
+	margin: 10%;
+	width: 50px;
+	height: 50px;
 }
 
 .active-selector{
@@ -45,16 +59,17 @@
 .controls{
 	margin: 10px;
 	
-	width: 33vw;
-	
-	text-align: right;
+	grid-column: 2 / 3;
+	justify-self: center;
 }
 
 /*Submit Message Section*/
 .submit-msg{
-	width: 33vw;
+	margin: 10px;
 	
-	text-align: right;
+	grid-column: 2 / 3;
+	justify-self: center;
+	
 	font-size: 25px;
 	font-weight: bold;
 	font-family: monospace;

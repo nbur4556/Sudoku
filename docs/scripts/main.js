@@ -11,6 +11,9 @@ class SquareNode{
 }
 
 window.onload = function(){
+	const WIN_MESSAGE = "Correct";
+	const LOSE_MESSAGE = "Incorrect";
+	
 	InitAllSquares();
 	submitMsg = document.getElementById("submit-msg");
 	
@@ -30,7 +33,6 @@ window.onload = function(){
 	var numberSelectors = document.getElementsByClassName("selector");
 	for(let i = 0; i < numberSelectors.length; i++){
 		numberSelectors[i].onclick = function(){
-			console.log("Selector: " + (i + 1));
 			if(numberSelectors[i].classList[1] == "active-selector"){
 				UnsetSelectNumber(numberSelectors[i]);
 			}
@@ -44,6 +46,8 @@ window.onload = function(){
 	//CONTROLS	
 	document.getElementById("btn-new").addEventListener("click", function(){
 		submitMsg.innerHTML = "";
+		selectNumber = 0;
+		UnselectAll(numberSelectors);
 		NewPuzzle();
 	});
 	/*document.getElementById("btn-solve").addEventListener("click", function(){
@@ -51,14 +55,16 @@ window.onload = function(){
 	});*/
 	document.getElementById("btn-clear").addEventListener("click", function(){
 		submitMsg.innerHTML = "";
+		selectNumber = 0;
+		UnselectAll(numberSelectors);
 		ClearPuzzle();
 	});
 	document.getElementById("btn-submit").addEventListener("click", function(){
 		if(CheckValidPuzzle()){
-			submitMsg.innerHTML = "Correct";
+			submitMsg.innerHTML = WIN_MESSAGE;
 		}
 		else{
-			submitMsg.innerHTML = "Incorrect";
+			submitMsg.innerHTML = LOSE_MESSAGE;
 		}
 	});
 }
@@ -114,26 +120,22 @@ function NewPuzzle(){
 					y -= 2;
 					
 					isBacktracking = true;
-					
 					continue;
 				}
 			}
 			else{
 				currentNode.currentValue = 1;
 				if(currentNode.currentValue == currentNode.initialValue){
-					//console.log(x + " " + y); //Testing
 					allSquares[x][y].value = "";
 					currentNode = currentNode.parentNode;
 					y -= 2;
 					
 					isBacktracking = true;
-					
 					continue;
 				}
 			}
 			
 			isBacktracking = false;
-			//console.log(x + " " + y); //Testing
 			allSquares[x][y].value = currentNode.currentValue;
 			
 			while(CheckValidCell(x, y) == false){
@@ -152,7 +154,6 @@ function NewPuzzle(){
 						}
 						
 						isBacktracking = true;
-						
 						break;
 					}
 					
@@ -170,18 +171,12 @@ function NewPuzzle(){
 function SetSelectNumber(setNum, setBtn){
 	selectNumber = setNum;
 	setBtn.classList.add("active-selector");
-	
-	console.log(selectNumber);
-	console.log(setBtn.classList);
 }
 
 //Unsets select number
 function UnsetSelectNumber(setBtn){
 	selectNumber = 0;
 	setBtn.classList.remove("active-selector");
-	
-	console.log(selectNumber);
-	console.log(setBtn.classList);
 }
 
 //Unselects all number selectors
