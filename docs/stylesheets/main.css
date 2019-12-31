@@ -1,9 +1,9 @@
 article{
 	display: grid;
-	grid-template-columns: 30% 40% 20% 30%;
+	grid-template-columns: 30% 40% auto 30%;
 }
 
-/*Puzzle Section*/
+/* ========== Puzzle Grid Section ========== */
 .puzzle{
 	display: grid;
 	grid-template-columns: repeat(3, 11vw);
@@ -20,7 +20,7 @@ article{
 
 .nonet{
 	display: grid;
-	grid-template-columns: 33.33% 33.33% 33.33%;
+	grid-template-columns: repeat(3, 33.33%);
 	align-items: stretch;
 	
 	border: 1px solid black;
@@ -35,7 +35,7 @@ article{
 	font-family: monospace;
 }
 
-/*Number Selectors Section*/
+/* ========== Number Selectors Section ========== */
 .number-selectors{
 	display: flex;
 	flex-direction: column;
@@ -49,28 +49,38 @@ article{
 .selector{
 	width: 3vw;
 	height: 3vw;
+	
+	font-size: 20px;
+	font-family: monospace;
 }
 
 .active-selector{
 	background-color: yellow;
 }
 
-/*Controls Section*/
+/* ========== Controls Section ========== */
 .controls{
-	margin: 10px;
-	
-	grid-column: 2 / 3;
+	grid-column: 2 / 4;
 	justify-self: center;
 }
 
-/*Submit Message Section*/
+.controls button{
+	margin: 15px;
+	
+	width: 5vw;
+	height: 50px;
+	
+	font-size: 15px;
+	font-family: monospace;
+}
+
+/* ========== Submit Message Section ========== */
 .submit-msg{
-	margin: 10px;
+	margin: 5px;
 	
 	grid-column: 2 / 3;
 	justify-self: center;
 	
 	font-size: 25px;
-	font-weight: bold;
 	font-family: monospace;
 }
